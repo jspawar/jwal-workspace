@@ -1,8 +1,12 @@
 [git-together]
-  domain = pivotal.io
+  domain = vmware.com
 [git-together "authors"]
   ac  = "Andrew Costa; ancosta@vmware.com"
   aw  = "Andrew Wittrock; awittrock@vmware.com"
-  jp  = "James Pollard; pollardja@vmware.com"
-  jw  = "Jaskanwal Pawar; jpawar"
+  cy  = "Caitlyn Yu; caitlyny"
+  dw  = "Dave Walter; walterda"
+  jp  = "Jaskanwal Pawar; jpawar"
+  mr  = "Matt Royal; mroyal"
+  td  = "Tim Downey; tdowney"
+  personal = "Jaskanwal Pawar; jaskanwal.pawar@gmail.com"
   bot = "CAPI CI; cf-capi-eng+ci"

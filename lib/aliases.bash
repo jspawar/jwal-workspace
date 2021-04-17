@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-alias vim=nvim
+alias vim='emacs -nw'
+alias emc='emacsclient -t -c'
 
 # fasd
 alias v='fasd -e vim'
