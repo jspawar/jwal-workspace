@@ -1,15 +1,23 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-HOURS=$1
-KEY="/tmp/id_rsa"
-trap "rm -f $KEY" EXIT
-lpass show "github-private-key" --field="Private Key" > $KEY
-chmod 600 $KEY
-if [ -z $HOURS ]; then
-  HOURS=12
+ssh_key_item_name="ssh-key"
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: load_ssh_key <number-of-hours>"
+    exit 1
 fi
-ssh-add -D
-ssh-add -t ${HOURS}H $KEY
-echo "You are logged in now!"
+hours="$1"
+
+# load session key appropriately
+bw_status="$(bw status | jq -r .status)"
+if [ "${bw_status}" = "unauthenticated" ]; then
+    session_key="$(bw login --raw)"
+else
+    session_key="$(bw unlock --raw)"
+fi
+export BW_SESSION="${session_key}"
+
+# fetch SSH key from vault
+ssh-add -t "${hours}H" - <<< "$(bw get item "${ssh_key_item_name}" | jq -r .notes)"
